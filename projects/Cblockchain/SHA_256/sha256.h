@@ -22,6 +22,9 @@
 
 // SHA-256 initial hash value (H0..H7)
 #define SHA256_STATE_WORDS 8
+// 256-bit digest size
+#define SHA256_DIGEST_BYTES 32
+#define SHA256_WORD_BYTES 4
 static const uint32_t SHA256_H_INIT[SHA256_STATE_WORDS] = {
     0x6a09e667u, 0xbb67ae85u, 0x3c6ef372u, 0xa54ff53au,
     0x510e527fu, 0x9b05688cu, 0x1f83d9abu, 0x5be0cd19u
@@ -108,6 +111,7 @@ void compress_message_schedule(uint32_t H[SHA_INITIAL_CONSTANTS_LENGHT], const u
 // - hash arbitrary bytes (not only null-terminated strings)
 // - return either the raw state words or the final hex digest string
 int sha256_hash_bytes(const uint8_t *message, size_t message_len_bytes, uint32_t out_H[SHA256_STATE_WORDS]);
+int sha256_hash_digest(const uint8_t *message, size_t message_len_bytes, uint8_t out_digest[SHA256_DIGEST_BYTES]);
 int sha256_hash_hex(const uint8_t *message, size_t message_len_bytes, char out_hex[SHA_OUT_HEX_RESULT_LENGTH]);
 
 

@@ -48,6 +48,23 @@ int sha256_hash_hex(const uint8_t *message, size_t message_len_bytes, char out_h
     return 0;
 }
 
+int sha256_hash_digest(const uint8_t *message, size_t message_len_bytes, uint8_t out_digest[SHA256_DIGEST_BYTES])
+{
+    uint32_t H[SHA256_STATE_WORDS];
+    if (sha256_hash_bytes(message, message_len_bytes, H) != 0) {
+        return 1;
+    }
+
+    // Convert H[0..7] words into 32 bytes (big-endian)
+    for (size_t i = 0; i < SHA256_STATE_WORDS; i++) {
+        out_digest[i * SHA256_WORD_BYTES + 0] = (uint8_t)(H[i] >> 24);
+        out_digest[i * SHA256_WORD_BYTES + 1] = (uint8_t)(H[i] >> 16);
+        out_digest[i * SHA256_WORD_BYTES + 2] = (uint8_t)(H[i] >> 8);
+        out_digest[i * SHA256_WORD_BYTES + 3] = (uint8_t)(H[i] >> 0);
+    }
+    return 0;
+}
+
 int sha_fn(unsigned char message[]){
     // Convenience wrapper for null-terminated text input.
     size_t message_len_bytes = strlen((const char *)message);
