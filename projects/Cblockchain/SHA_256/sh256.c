@@ -12,44 +12,53 @@ int main(){
 
     // step 1
     unsigned char message[] = "";
-    size_t message_len_bytes = strlen((const char *)message);
+    sha_fn(message);
+}
 
-    // get initial values with helpers
+int sha256_hash_bytes(const uint8_t *message, size_t message_len_bytes, uint32_t out_H[SHA256_STATE_WORDS])
+{
     size_t n_bits = message_size_bits(message_len_bytes);
     size_t k = find_number_of_zeros_needed(n_bits);
     size_t total_bits = padded_message_size_bits(n_bits, k);
     size_t num_blocks = block_count_from_total_bits(total_bits);
 
-    // initialize to zero
     uint8_t *blocks = calloc(total_bits, sizeof(uint8_t));
     if (blocks == NULL) {
         fprintf(stderr, "Failed to allocate %zu bits buffer\n", total_bits);
         return 1;
     }
 
-    printf("message bits: %zu\n", n_bits);
-    printf("k (zero bits): %zu\n", k);
-    printf("total bits: %zu\n", total_bits);
-    printf("num blocks: %zu\n", num_blocks);
-
-    if (encode_message(message, message_len_bytes, blocks, total_bits) != 0) {
+    if (encode_message((const unsigned char *)message, message_len_bytes, blocks, total_bits) != 0) {
         free(blocks);
         return 1;
     }
 
-    // Debug: print padded bits
-    // print_bits(blocks, total_bits);
-
-    uint32_t H[SHA256_STATE_WORDS];
-    message_schedule(blocks, num_blocks, H);
-
-    char hex[SHA_OUT_HEX_RESULT_LENGTH];
-    sha256_hex(H, hex);
-    printf("sha256: %s\n", hex);
+    message_schedule(blocks, num_blocks, out_H);
     free(blocks);
     return 0;
 }
 
+int sha256_hash_hex(const uint8_t *message, size_t message_len_bytes, char out_hex[SHA_OUT_HEX_RESULT_LENGTH])
+{
+    uint32_t H[SHA256_STATE_WORDS];
+    if (sha256_hash_bytes(message, message_len_bytes, H) != 0) {
+        return 1;
+    }
+    sha256_hex(H, out_hex);
+    return 0;
+}
+
+int sha_fn(unsigned char message[]){
+    // Convenience wrapper for null-terminated text input.
+    size_t message_len_bytes = strlen((const char *)message);
+
+    char hex[SHA_OUT_HEX_RESULT_LENGTH];
+    if (sha256_hash_hex((const uint8_t *)message, message_len_bytes, hex) != 0) {
+        return 1;
+    }
+    printf("sha256: %s\n", hex);
+    return 0;
+}
 /* This function is a the one responsible for performing the padding of */
 int encode_message(const unsigned char message[], size_t message_len_bytes, uint8_t block_bits[], size_t total_bits){
     size_t j = 0;

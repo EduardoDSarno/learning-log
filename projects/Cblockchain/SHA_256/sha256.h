@@ -104,6 +104,15 @@ static inline uint32_t Ch(uint32_t x, uint32_t y, uint32_t z);
 void sha256_hex(const uint32_t H[SHA256_STATE_WORDS], char out_hex[SHA_OUT_HEX_RESULT_LENGTH]);
 void compress_message_schedule(uint32_t H[SHA_INITIAL_CONSTANTS_LENGHT], const uint32_t W[NUMBER_OF_WORDS_ARRAY] );
 
+// Public API (recommended for external files):
+// - hash arbitrary bytes (not only null-terminated strings)
+// - return either the raw state words or the final hex digest string
+int sha256_hash_bytes(const uint8_t *message, size_t message_len_bytes, uint32_t out_H[SHA256_STATE_WORDS]);
+int sha256_hash_hex(const uint8_t *message, size_t message_len_bytes, char out_hex[SHA_OUT_HEX_RESULT_LENGTH]);
+
+
+
+int sha_fn(unsigned char message[]); 
 
 #endif // SHA256_H
 
