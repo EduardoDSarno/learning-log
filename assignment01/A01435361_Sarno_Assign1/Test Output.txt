@@ -1,0 +1,30 @@
+Input Roman numeral # 1: 
+I = 1
+
+Input Roman numeral # 2: 
+M = 1000
+
+Input Roman numeral # 3: 
+W Error - last character was not valid!!!
+
+Input Roman numeral # 4: 
+VII = 7
+
+Input Roman numeral # 5: 
+IV = 4
+
+Input Roman numeral # 6: 
+DM? Error - last character was not valid!!!
+
+Input Roman numeral # 7: 
+MLXVI = 1066
+
+Input Roman numeral # 8: 
+MCMLIV = 1954
+
+Input Roman numeral # 9: 
+MDMCMLMXMVMIM = 6334
+
+Input Roman numeral # 10:
+MMXXVI = 2026
+
