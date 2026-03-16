@@ -1,6 +1,5 @@
 #include "serialize.h"
-#include <string.h>
-#include <stddef.h>
+
 
 size_t serialize(const Block *block, uint8_t * buffer, size_t buffer_size){
 
@@ -46,7 +45,7 @@ size_t serialized_size(const Block *block){
     size += sizeof(block->nounce);
 
     // dynamic transaction size
-    size_t transaction_size = transaction_size = serialize_transaciton_size(block);
+    size_t transaction_size = serialize_transaciton_size(block);
 
     size += transaction_size;
     return size;

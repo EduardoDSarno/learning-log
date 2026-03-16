@@ -1,5 +1,7 @@
-#include "../block.h"
+#include "../block/block.h"
 #include "../SHA_256/sha256.h"
+#include <string.h>
+#include <stddef.h>
 
 
 // defined sizes
@@ -13,3 +15,4 @@
 
 size_t serialized_size(const Block *);
 size_t serialize_transaciton_size(const Block *);
+size_t serialize(const Block *block, uint8_t * buffer, size_t buffer_size);

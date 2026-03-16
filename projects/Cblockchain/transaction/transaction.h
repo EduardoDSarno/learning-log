@@ -2,7 +2,7 @@
 #define TRANSACTION_H
 #include <stdint.h>
 #include <stdlib.h>
-#include "SHA_256/sha256.h"
+#include "../SHA_256/sha256.h"
 
 #define SIGNATURE_LENGTH_BYTES 64
 #define ADDRESS_LENGTH_BYTES 32
