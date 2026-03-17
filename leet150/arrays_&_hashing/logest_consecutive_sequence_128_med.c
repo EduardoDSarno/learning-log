@@ -77,37 +77,32 @@ int longestConsecutive(int* nums, int numsSize) {
         insert(hashset, nums[i], table_size);
     }
 
-    size_t curr_sequence = 0; // minimun sequence is alwasy 1
-    int max = 0;
-    
-    for (int i = 0; i < numsSize; ++i) {
-        
-        // if num[i] - 1 does not exits, meaning that we started a sequence
-        if (!get(hashset, table_size, nums[i] -  1)) {
-            
-            int j = 0;
-            // while there is another next number we keep going
-            while (get(hashset, table_size, nums[i] + j)) 
-            {
-              curr_sequence++;
-               j++;
-            }      
-            
-            if (curr_sequence > max) {
-                max = curr_sequence;
+    int current_sequence = 0;
+    int max_senquence_len = 0;
+    // loop through hashmaps
+    for (int i = 0; i < table_size; i++) {
+
+        Set *set = hashset[i];
+        while (set != NULL) {
+            // check if set->key - 1 exists
+            if (get(hashset, table_size, set->key - 1)) {
+                // if does it means is in middle of streak
+                // so we must get out
+                ;
             }
-            curr_sequence = 0;
+            else 
+            {
+                int j = 0;
+                while (get(hashset, table_size, set->key + j)) 
+                {
+                    current_sequence++;
+                    j++;
+                }
+                if (current_sequence > max_senquence_len) max_senquence_len = current_sequence;
+                current_sequence = 0;
+            }
+            set = set->next; // advance
         }
     }
-     // free everything
-    for (size_t i = 0; i < table_size; i++) {
-        Set *node = hashset[i];
-        while (node) {
-            Set *tmp = node;
-            node = node->next;
-            free(tmp);
-        }
-    }
-    free(hashset);
-    return max;
+    return max_senquence_len;
 }
