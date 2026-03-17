@@ -10,7 +10,7 @@ public:
 
         size_t length = s.length();
         int cleaned_count = 0;
-
+        
         string cleaned = "";
 
         for(char c : s){
