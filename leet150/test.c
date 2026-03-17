@@ -1,63 +1,61 @@
 // gcc -o test test.c && ./test
-
-#include <ctype.h>
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-
-char* clean_string(char * input, size_t buffer_size){
-
-    char * output = malloc(buffer_size);
-    int output_curr = 0;
-
-    for (int i = 0; i < buffer_size; ++i) {
-        if (isalpha(input[i])) {
-            output[output_curr] = tolower(input[i]);
-            output_curr++;
-        }
-    }
-    output[output_curr] = '\0';
+int* twoSum(int* numbers, int numbersSize, int target, int* returnSize) {
     
-    return output;
-}
+    *returnSize = 2;
+    int * return_array = malloc(sizeof(int) * *returnSize);
 
-int isPalindrome(char* s) {
-
-  char *cleaned = clean_string(s, strlen(s));
-  size_t foward = 0;
-  size_t backward = strlen(cleaned) -1;
-
-  // empty string case
-  if(cleaned[0] == '\0') 
-  {
-    free(cleaned); 
-    return 1;
-  }
-  // one from each side until they hit
-  while (foward < backward) {
-    
-    if (cleaned[foward] == cleaned[backward]) {
-      foward++;
-      backward--;
-      continue;
-    }
-    else 
+    for (int i = 0; i < numbersSize; ++i) 
     {
-      // not polindrome
-      //printf("NO");
-      free(cleaned);
-      return 0;
+    
+      int second_target = 0;
+      second_target = target - numbers[i];
+      return_array[0] = i + 1; // result 1
+      
+      //printf("first num %d\n", i);
+
+      int high = numbersSize - 1;
+      int low = i + 1; // so we ignore the seen indexes
+
+      while (low <= high) {
+        int mid = low + (high - low) / 2; // to avoud overflow
+
+        if (numbers[mid] == second_target) 
+        {
+          
+          return_array[1] = mid + 1; // result 2
+          return return_array;
+          //printf(" mid %d\n", mid  + 1);
+        }
+        else if (numbers[mid] < second_target) {
+          low = mid + 1;
+        }
+        else {
+          high = mid - 1;
+        }
+          
+      } 
     }
-  }
-  //printf("yes");
-  free(cleaned);
-  return 1;
+    return return_array;
 }
 
 int main(void) {
+    int numbers[] = {2,7,11,15};
+    int target = 9;
+    int numbersSize = sizeof(numbers) / sizeof(numbers[0]);
+    int returnSize;
 
-    char *something = " ";
+    int *result = twoSum(numbers, numbersSize, target, &returnSize);
 
-    size_t size = strlen(something);
-    isPalindrome(something);
+    for (int i = 0; i < returnSize; i++) {
+        printf("%d ", result[i]);
+    }
+    printf("\n");
+
+    free(result);
+    return 0;
 }
