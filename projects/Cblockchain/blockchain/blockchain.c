@@ -92,32 +92,32 @@ BlockChain *init(){
     */
 int inser_block(Block * new_block, BlockChain* blockchain){
 
-    void *temp_blocks = realloc(blockchain->blocks + 1, sizeof(Block *) * blockchain->block_count);
+    void *temp_blocks = realloc(blockchain->blocks, sizeof(Block *) * (blockchain->block_count + 1));
 
     if (temp_blocks == NULL) {
-        fprintf(stderr, "Error: An error accured when trying to realocated memory for new block");
-        return 0; // failed
+        fprintf(stderr, "Error: An error occurred when trying to reallocate memory for new block");
+        return 0;
     }
     blockchain->blocks = temp_blocks;
+    blockchain->blocks[blockchain->block_count] = new_block;
     
-    void *temp_hash_array = realloc
-                        (blockchain->hash_array, 
-                        (blockchain->block_count + 1)* SHA256_DIGEST_BYTES * sizeof(uint8_t));
+    void *temp_hash_array = realloc(blockchain->hash_array, 
+                        (blockchain->block_count + 1) * SHA256_DIGEST_BYTES * sizeof(uint8_t));
 
     if (temp_hash_array == NULL){
-        fprintf(stderr, "Error: An error accured when trying to realocated memory for new hashing");
-        return 0; // failed
+        fprintf(stderr, "Error: An error occurred when trying to reallocate memory for hashing");
+        return 0;
     }
     blockchain->hash_array = temp_hash_array;
+    memcpy(blockchain->hash_array[blockchain->block_count], 
+            new_block->previous_hash, SHA256_DIGEST_BYTES);
 
-    // adding previous hash
     hash(new_block, blockchain->last_block);
 
     blockchain->last_block = new_block;
     blockchain->block_count++;
 
-    return 1; // sucess
-
+    return 1;
 }
 
  /* 
@@ -125,6 +125,7 @@ My current implementation is just a cover so I can continue, but the future
 Todo here we have to implement a hashmap inside the blockchain to grab blocks at O(1)
 */
 
-Block* get_block(size_t index, const BlockChain *blockchain ){
+Block* get_block(size_t index, const BlockChain *blockchain )
+{
     return blockchain->blocks[index];
 }
