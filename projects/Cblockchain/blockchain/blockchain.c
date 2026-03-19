@@ -28,7 +28,7 @@ BlockChain *init(){
         goto cleanup;
     }
 
-     *new_block = block_init(
+        new_block = block_init(
         0, // index
         time(NULL), // timestamp
         temp_hash,

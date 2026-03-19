@@ -22,12 +22,13 @@ typedef struct Block{
     size_t transactions_count;
 }Block;
 
-Block block_init(uint32_t index,
-           uint64_t timestamp,
-           const uint8_t previous_hash[SHA_OUTPUT_BYTES],
-           uint32_t nounce,
-           const Transaction *transactions,
-           size_t transactions_count);
+Block *block_init(
+    uint32_t index,
+    uint64_t timestamp,
+    const uint8_t previous_hash[SHA256_DIGEST_BYTES],
+    uint32_t nounce,
+    const Transaction *transactions,
+    size_t transactions_count);
 
 
 
