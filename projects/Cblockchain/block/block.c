@@ -1,4 +1,4 @@
-#include "Block.h"
+#include "block.h"
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
