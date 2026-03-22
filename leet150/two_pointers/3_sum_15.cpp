@@ -1,3 +1,6 @@
+#include <cstddef>
+#include <cstdio>
+#include <iterator>
 #include <vector>
 #include <algorithm>
 
@@ -6,46 +9,67 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
-        
-        // modfies vector in place
+     
         vector<vector<int>> result;
 
-         sort(nums.begin(), nums.end());
+        // sort vec
+        sort(nums.begin(), nums.end());
 
-         int size = nums.size() - 1;
-         for (int i = 0; i < size; ++i) {
-            
+        size_t size = nums.size();
+        for (int i = 0; i < size; i++) {
+            // fix one number meaning loopign throughout nums and applying to sum
+
+            // The edge case here is to skip the duplicated for i
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
             int left = i + 1;
-            int right = size;
+            int right = nums.size() - 1;
+
 
             while (left < right) {
-                int sum = left + right + nums[i];
+                
+                // we need to get the sum of items
+                int sum = nums[left] + nums[right] + nums[i];
 
-                if(sum == 0){
-                    vector<int> triplet = {nums[left], nums[right], nums[i]};
+                if (sum == 0) {
+                    // correct triplet
+                    vector<int> triplet = {nums[i], nums[left],nums[right]};
                     result.push_back(triplet);
-                    left += 1;
-                    right -= 1;
 
-                    // elimitate duplicates for left
+                    // this is because we can not contain duplicate triplets, 
+                    // so by having already left and right as know we wouldn't 
+                    // have another valid solution since for any nums[i] in the 
+                    // loop the triple would be the same
+                    left++;
+                    right--;
+                    
+
+                    // now since it is sorted we still can have cases where we have multiple
+                    // duplicated nums on after the other so we must remove the duplicates 
+                    // for right and left
+                    // also another details is that we must compare the PREVIOUS nums[index]
+                    // since we are already ++ above
                     while (left < right && nums[left] == nums[left - 1]) {
-                        left+=1;
+                        left++;
                     }
 
-                    // elimitate duplicates for left
                     while (left < right && nums[right] == nums[right + 1]) {
-                        right -= 1;
+                        right--;
                     }
-
                 }
                 else if (sum < 0) {
-                    left+=1;
+                    // since is sorted we want a higher number if left < 0 so:
+                    left++;
                 }
-                else {
-                    right-=1;
+                else{
+                    right--;
                 }
+
             }
-         }
-         return result;
+
+        }
+        return result;
+
     }
 };
