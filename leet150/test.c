@@ -43,19 +43,30 @@ int* twoSum(int* numbers, int numbersSize, int target, int* returnSize) {
     return return_array;
 }
 
-int main(void) {
-    int numbers[] = {2,7,11,15};
-    int target = 9;
-    int numbersSize = sizeof(numbers) / sizeof(numbers[0]);
-    int returnSize;
+// int main(void) {
+//     int numbers[] = {2,7,11,15};
+//     int target = 9;
+//     int numbersSize = sizeof(numbers) / sizeof(numbers[0]);
+//     int returnSize;
 
-    int *result = twoSum(numbers, numbersSize, target, &returnSize);
+//     int *result = twoSum(numbers, numbersSize, target, &returnSize);
 
-    for (int i = 0; i < returnSize; i++) {
-        printf("%d ", result[i]);
-    }
-    printf("\n");
+//     for (int i = 0; i < returnSize; i++) {
+//         printf("%d ", result[i]);
+//     }
+//     printf("\n");
 
-    free(result);
-    return 0;
+//     free(result);
+//     return 0;
+// }
+
+int main(void){
+
+  char  firsts[] = "";
+
+  scanf("%s", firsts);
+
+  printf("%s",firsts);
+
+
 }
