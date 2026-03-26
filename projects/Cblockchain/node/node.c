@@ -5,20 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct Node {
 
-    uint8_t pub_key [SIZE_PUB_KEY_BYTES];
-    uint8_t priv_key[SIZE_PRIV_KEY_BYTES];   
-    uint8_t address [SHA256_DIGEST_BYTES];
-
-    // for TCP Node conneciton
-
-    uint16_t port; // values from 0 -> 65535
-
-    /* Chose for IPV4*/
-    uint32_t ipv4;
-
-}Node;
 
 /* use dev/urandom for generating private key
     and then isomg ECDSA bitcoin library to get the pub key
