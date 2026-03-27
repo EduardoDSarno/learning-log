@@ -19,7 +19,8 @@ typedef enum {
 
 typedef struct TCPClient{
 
-    Socket server_socket;
+    uint16_t server_port;
+    uint32_t server_ipv4;
     Socket client_socket;
     ClientState state;
 

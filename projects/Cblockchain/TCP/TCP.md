@@ -38,3 +38,8 @@ These fils are reponsible for setting all the server attributes and it's functio
 -The listen function uses just C listen function and it is a wrapper to fit our strucutre
 -THe function connect is where most things heppens, we call connect C function with our file descriptor (of the server socket)
     and the address of the future client socket and it's size, so the OS can set up the client side Socket and finish the connection
+
+
+client/
+
+We finish we clinet module that has a structure of 

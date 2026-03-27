@@ -46,6 +46,10 @@ int client_connect( TCPClient * client, const uint16_t server_port, const uint32
         return result;
     }
 
+
+    client->server_ipv4 = server_ipv4;
+    client->server_port = server_port;
+
     client->state = CONNECTED;
     return result;
 
