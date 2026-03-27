@@ -69,8 +69,8 @@ Node *node_init(uint8_t pub_key [SIZE_PUB_KEY_BYTES],
     return new_node;
 
     cleanup:
-        if(temp_pubkey != NULL) safe_free(temp_pubkey, sizeof(uint8_t) * SIZE_PUB_KEY_BYTES);
-        if(new_node != NULL) safe_free(new_node, sizeof(Node));
+        safe_free(temp_pubkey, sizeof(uint8_t) * SIZE_PUB_KEY_BYTES);
+        safe_free(new_node, sizeof(Node));
         if(file != NULL)        fclose(file);
         return NULL;
 
@@ -129,7 +129,7 @@ uint8_t* generate_pub_key_helper(const uint8_t *priv_key, FILE *file)
     return compressed_pubkey;
 
     cleanup:
-        if(compressed_pubkey != NULL) safe_free(compressed_pubkey, sizeof(uint8_t) * SIZE_PUB_KEY_BYTES);
+        safe_free(compressed_pubkey, sizeof(uint8_t) * SIZE_PUB_KEY_BYTES);
         if(ctx != NULL) secp256k1_context_destroy(ctx);
         return NULL;
 

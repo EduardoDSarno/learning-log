@@ -65,11 +65,11 @@ BlockChain *init(){
     cleanup:
         if(c_chain != NULL) 
         {
-            if (c_chain->hash_array != NULL) safe_free(c_chain->hash_array, SHA256_DIGEST_BYTES * sizeof(uint8_t));
-            if (c_chain->blocks != NULL) safe_free(c_chain->blocks, sizeof(Block *));
+            safe_free(c_chain->hash_array, SHA256_DIGEST_BYTES * sizeof(uint8_t));
+            safe_free(c_chain->blocks, sizeof(Block *));
         }
-        if (c_chain != NULL) safe_free(c_chain, sizeof(BlockChain));
-        if (new_block != NULL) safe_free(new_block, sizeof(Block));
+        safe_free(c_chain, sizeof(BlockChain));
+        safe_free(new_block, sizeof(Block));
         return NULL;
 }
 

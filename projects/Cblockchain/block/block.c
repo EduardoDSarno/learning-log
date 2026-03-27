@@ -41,7 +41,7 @@ Block *block_init(
     return block;
 
     cleanup:
-        if (block != NULL) safe_free(block, sizeof(Block));
+        safe_free(block, sizeof(Block));
         return NULL;
 
 }

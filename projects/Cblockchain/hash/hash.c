@@ -36,7 +36,7 @@ int hash(Block *new_block, Block *prev_block)
 
 
     cleanup:
-        if (serialized_buffer != NULL) safe_free(serialized_buffer, sizeof(uint8_t) * block_size);
+        safe_free(serialized_buffer, sizeof(uint8_t) * block_size);
         // preventing error message in sucessefull calls
         if(result == 0) fprintf(stderr, "Error: That was a error Hashing your Block");
         return result;

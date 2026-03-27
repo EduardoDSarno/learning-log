@@ -31,6 +31,6 @@ Socket *socket_init(const uint16_t port,const uint32_t ipv4)
     return new_socket;
 
     cleanup:
-        if (new_socket != NULL) safe_free(new_socket, sizeof(Socket));
+        safe_free(new_socket, sizeof(Socket));
         return NULL;
 }

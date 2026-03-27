@@ -28,13 +28,7 @@ void *safe_malloc(size_t bytes_to_allocate){
 void *safe_realloc(void * dest_pointer , size_t bytes_to_reallocate, size_t old_size){
 
     if (dest_pointer == NULL) {
-        fprintf(stderr, "Error Reallocating memory");
-        return NULL;
-    }
-
-    if(old_size > bytes_to_reallocate){
-        fprintf(stderr, "Error Reallocating memory: Bytes to reallocate < old bytes");
-        return dest_pointer;
+        return safe_malloc(bytes_to_reallocate);
     }
 
     void * pointer = realloc(dest_pointer, bytes_to_reallocate);
@@ -44,7 +38,11 @@ void *safe_realloc(void * dest_pointer , size_t bytes_to_reallocate, size_t old_
         return NULL;
     }
     
-    bytes_alloc += (bytes_to_reallocate - old_size);
+    if (bytes_to_reallocate >= old_size) {
+        bytes_alloc += (bytes_to_reallocate - old_size);
+    } else {
+        bytes_alloc -= (old_size - bytes_to_reallocate);
+    }
 
     return pointer;
 }
@@ -53,13 +51,12 @@ void *safe_realloc(void * dest_pointer , size_t bytes_to_reallocate, size_t old_
 void safe_free(void * pointer, size_t free_size_bytes){
 
     if (pointer ==  NULL) {
-        fprintf(stderr, "Error freeing: NULL");
+        return;
     }
-    else {
-        free(pointer);
-        bytes_alloc -= free_size_bytes;
-        malloc_count--;
-    }
+
+    free(pointer);
+    bytes_alloc -= free_size_bytes;
+    malloc_count--;
 }
 
 /* This function is for us to print the status of the dynamic memory allocated*/

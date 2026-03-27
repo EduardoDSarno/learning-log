@@ -21,6 +21,6 @@ TCPServer *server_init(const uint16_t port,const uint32_t ipv4)
 
     // free(server_socket)
     cleanup:
-        if (server_socket != NULL) safe_free(server_socket, sizeof(Socket)); 
+        safe_free(server_socket, sizeof(Socket)); 
         return NULL;
 }
