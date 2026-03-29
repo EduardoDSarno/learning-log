@@ -21,11 +21,8 @@ struct tcphdr * listen_syn_package(uint16_t * buffer, size_t buffer_size){
     return received_header;
 }
 
-void send_ack_packet(struct sockaddr_in source, struct tcphdr *header){
-
-    int sockfd = socket(PF_INET, SOCK_RAW, IPPROTO_TCP);
-
-    socklen_t dest_len = sizeof(source);
-    header->th_flags = TH_ACK;
-
+void send_ack_packet(struct sockaddr_in source, struct sockaddr_in destination,
+                     struct tcphdr *header, uint32_t ack_num)
+{
+    send_packet(source, destination, header, TH_ACK, ack_num);
 }

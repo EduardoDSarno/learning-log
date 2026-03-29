@@ -11,13 +11,13 @@ int main(void){
     unsigned int dest_port = 80;
     uint32_t destination_ipv4 = inet_addr("127.0.0.1");
     uint32_t source_ipv4 = inet_addr("127.0.0.1");
-    uint8_t *message = NULL;
 
+    struct sockaddr_in source = addr_init(&src_port, &source_ipv4);
+    struct sockaddr_in destination = addr_init(&dest_port, &destination_ipv4);
 
     struct tcphdr *header = malloc(sizeof(struct tcphdr));
-    
 
-    send_sync_packet(header, src_port, &dest_port, &destination_ipv4,&source_ipv4, message);
+    send_sync_packet(source, destination, header);
 
     free(header);
 

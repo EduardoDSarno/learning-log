@@ -3,10 +3,7 @@
 
 #include "../shared/helpers.h"
 
-void send_sync_packet(struct tcphdr *header,unsigned int src_port,
-                                            unsigned int *dest_port,
-                                            const uint32_t *destination_ipv4,
-                                            const uint32_t *source_ipv4,
-                                            const uint8_t  *message);
+void send_sync_packet(struct sockaddr_in source, struct sockaddr_in destination,
+                                                 struct tcphdr *header);
 
 #endif
