@@ -19,7 +19,10 @@ void send_packet(struct sockaddr_in source, struct sockaddr_in destination,
     size_t size = 0;
     uint16_t * buffer = format_check_sum(header, NULL, 0, source.sin_addr.s_addr, destination.sin_addr.s_addr, &size);
 
+
     // check summing
+    /*I found out that OS does the verification for the check sum automatically
+        but I will probably do my own after setting everything up*/
     uint16_t checksum = check_sum(buffer, &size);
 
     header->th_sum = checksum;

@@ -1,12 +1,14 @@
 // gcc main.c -o main && sudo ./main
 
-#include "client/header.h"
+#include "client/client.h"
 #include "shared/helpers.h"
+#include <time.h>
 #include <stdlib.h>
 #include <string.h>
 
 int main(void){
 
+    srand(time(NULL)); // for rand sequence number
     unsigned int src_port = 12345;
     unsigned int dest_port = 80;
     uint32_t destination_ipv4 = inet_addr("127.0.0.1");

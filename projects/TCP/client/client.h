@@ -1,5 +1,5 @@
-#ifndef MY_HEADER_H
-#define MY_HEADER_H
+#ifndef CLIENT_H
+#define CLIENT_H
 
 #include "../shared/helpers.h"
 

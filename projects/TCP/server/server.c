@@ -1,4 +1,4 @@
-#include "header.h"
+#include "server.h"
 #include <stddef.h>
 #include <stdlib.h>
 
@@ -9,7 +9,7 @@ struct tcphdr * listen_syn_package(uint16_t * buffer, size_t buffer_size){
     // raw socket
     int sockfd = socket(PF_INET, SOCK_RAW, IPPROTO_TCP);
 
-    struct sockaddr_in src = addr_init(NULL, NULL);
+    struct sockaddr_in src = {0};
     socklen_t src_len = sizeof(src);
 
     /* we use pointer because recvfrom writes back to the struct*/
@@ -22,7 +22,12 @@ struct tcphdr * listen_syn_package(uint16_t * buffer, size_t buffer_size){
 }
 
 void send_ack_packet(struct sockaddr_in source, struct sockaddr_in destination,
-                     struct tcphdr *header, uint32_t ack_num)
+                     struct tcphdr *client_header, struct tcphdr *server_header)
 {
-    send_packet(source, destination, header, TH_ACK, ack_num);
+
+    uint32_t ack_num = ntohl(client_header->th_seq) + 1;
+    uint32_t seq_number = htonl(rand());
+    server_header->th_seq = seq_number;
+
+    send_packet(source, destination, server_header, (TH_SYN | TH_ACK), ack_num);
 }
