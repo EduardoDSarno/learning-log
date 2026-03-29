@@ -1,15 +1,6 @@
-#include <stdint.h>
+#include "pseIPHeader.h"
 #include <stdio.h>
 #include <stdlib.h>
-typedef struct PseudoIpHeader{
-
-    uint32_t ipv4_scr;
-    uint32_t ipv4_dest;
-    uint8_t  zero_byte; // just exits to allgin with the 16 bit word used by checksum
-    uint8_t  protocol_num; 
-    uint8_t  tcp_segment_lenght;
-} PseudoIpHeader;
-
 
 PseudoIpHeader *psdIpHeader_intit(uint32_t ipv4_scr,
                             uint32_t ipv4_dest,

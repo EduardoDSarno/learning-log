@@ -1,3 +1,5 @@
+#ifndef HELPERS_H
+#define HELPERS_H
 
 #include <stddef.h>
 #include <stdint.h>
@@ -8,4 +10,13 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netinet/tcp.h>
-#include "pseIPHeader.c"
+#include "pseIPHeader.h"
+
+uint16_t* format_check_sum(struct tcphdr *header, uint8_t *message_buffer, size_t buffer_size,
+        uint32_t ipv4_scr,
+        uint32_t ipv4_dest,
+        size_t *out_size_buffer);
+
+uint16_t check_sum(uint16_t *buffer, size_t *size);
+
+#endif

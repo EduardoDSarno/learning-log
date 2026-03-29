@@ -2,7 +2,7 @@
 
 /* this function will get the  Pseudo IP heade, TCP header and TCP body add to a buffer and return
     a pointer to this buffer with the formmated data to perfrom checksum*/
-    uint16_t* format_check_sum(struct tcphdr *header, uint8_t * message_buffer,  size_t buffer_size,
+uint16_t* format_check_sum(struct tcphdr *header, uint8_t * message_buffer,  size_t buffer_size,
         uint32_t ipv4_scr,
         uint32_t ipv4_dest,
         size_t *out_size_buffer)
