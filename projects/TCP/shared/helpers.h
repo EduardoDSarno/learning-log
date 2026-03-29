@@ -18,5 +18,6 @@ uint16_t* format_check_sum(struct tcphdr *header, uint8_t *message_buffer, size_
         size_t *out_size_buffer);
 
 uint16_t check_sum(uint16_t *buffer, size_t *size);
+struct sockaddr_in addr_init(const unsigned int *port,const uint32_t *ipv4_addr);
 
 #endif

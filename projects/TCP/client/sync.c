@@ -1,17 +1,13 @@
 #include "header.h"
 
-
 void send_sync_packet(struct tcphdr *header, unsigned int src_port,
-                                             unsigned int dest_port,
-                                             const uint32_t destination_ipv4){
+                                             unsigned int *dest_port,
+                                             const uint32_t *destination_ipv4){
 
 
     int sockfd = socket(PF_INET, SOCK_RAW, IPPROTO_TCP);
 
-    struct sockaddr_in dest;
-    dest.sin_family = AF_INET;     // Set the address family to IPv4
-    dest.sin_port = dest_port; // right endien
-    dest.sin_addr.s_addr = destination_ipv4;
+    struct sockaddr_in dest =  addr_init(dest_port, destination_ipv4);
     socklen_t dest_len = sizeof(dest);
     header->th_flags = TH_SYN;
 

@@ -4,7 +4,7 @@
 #include "../shared/helpers.h"
 
 void send_sync_packet(struct tcphdr *header, unsigned int src_port,
-                                             unsigned int dest_port,
-                                             const uint32_t destination_ipv4);
+                                             unsigned int *dest_port,
+                                             const uint32_t *destination_ipv4);
 
 #endif
