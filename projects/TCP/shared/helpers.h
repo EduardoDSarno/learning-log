@@ -12,6 +12,8 @@
 #include <netinet/tcp.h>
 #include "pseIPHeader.h"
 
+#define MAX_BUFFER_SIZE 65536
+
 uint16_t* format_check_sum(struct tcphdr *header, const uint8_t *message_buffer, size_t buffer_size,
         const uint32_t ipv4_scr,
         const uint32_t ipv4_dest,
@@ -21,5 +23,6 @@ uint16_t check_sum(uint16_t *buffer, size_t *size);
 struct sockaddr_in addr_init(const unsigned int *port,const uint32_t *ipv4_addr);
 void send_packet(struct sockaddr_in source, struct sockaddr_in destination,
                  struct tcphdr *header, uint8_t flags, uint32_t ack_num);
+struct tcphdr * listen_packet(uint8_t expected_flags);
 
 #endif
