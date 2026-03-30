@@ -14,6 +14,7 @@
 #include <netinet/ip.h>
 
 #define MAX_BUFFER_SIZE 65536
+#define MAX_CONNECT_TRIES 100
 
 typedef struct {
     struct sockaddr_in source;
