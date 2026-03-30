@@ -1,5 +1,4 @@
 #include "helpers.h"
-#include <unistd.h>
 
 /*This isa  generic send packet funciton used by both sync and ack (they will have wrappers for clarity)
     the only modification between them is hte flag and ack_num*/
@@ -8,7 +7,6 @@ void send_packet(struct sockaddr_in source, struct sockaddr_in destination,
 {
 
     int sockfd = socket(PF_INET, SOCK_RAW, IPPROTO_TCP);
-    if (sockfd < 0) { perror("send_packet socket"); return; }
 
     socklen_t dest_len = sizeof(destination);
     header->th_flags = flags;
@@ -31,14 +29,9 @@ void send_packet(struct sockaddr_in source, struct sockaddr_in destination,
     int bytes_send = sendto(sockfd, header, sizeof(struct tcphdr), 0, (struct sockaddr *)&destination, dest_len);
 
     if (bytes_send == -1) {
-        perror("sendto failed");
-    } else {
-        printf("[send] sent %d bytes: sport=%u dport=%u flags=0x%02x\n",
-               bytes_send,
-               ntohs(header->th_sport), ntohs(header->th_dport),
-               header->th_flags);
+    perror("sendto failed");
     }
+    printf("%d", bytes_send);
 
     free(buffer);
-    close(sockfd); /* BUG FIX 4: was leaking fd */
 }

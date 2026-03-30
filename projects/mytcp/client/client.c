@@ -31,20 +31,16 @@ void send_syn_ack_pack(struct sockaddr_in source, struct sockaddr_in destination
 void *client_thread(void *arg){
     const ConnectionData *data = (const ConnectionData *)arg;
 
-    // client listens on source port (port 12345 in this setup)
-    uint16_t my_port = data->source.sin_port; /* stored host byte order */
-    printf("[client] starting, my port = %u\n", my_port);
-
     struct tcphdr *client_header = malloc(sizeof(struct tcphdr));
     if(client_header == NULL){
         fprintf(stderr, "memory allocation error");
         return NULL;
     }
-    // 1: send first SYN
+    // 1: send firsrt SYN
     send_sync_packet(data->source, data->destination, client_header);
 
-    // pt3 Client listens for SYN-ACK destined to our port, then send final ACK
-    struct tcphdr *received_syn_ack = listen_packet(TH_SYN | TH_ACK, my_port);
+    // pt3 Client listens for SYN-ACK, then send final ACK
+    struct tcphdr *received_syn_ack = listen_packet(TH_SYN | TH_ACK);
     send_syn_ack_pack(data->source, data->destination, client_header, received_syn_ack);
 
     free(client_header);

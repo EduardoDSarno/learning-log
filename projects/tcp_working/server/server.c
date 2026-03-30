@@ -2,7 +2,6 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 
 
 void send_ack_packet(struct sockaddr_in source, struct sockaddr_in destination,
@@ -48,14 +47,8 @@ void *server_thread(void *arg){
         fprintf(stderr, "memory allocation error");
         return NULL;
     }
-    /* Small delay so the client's pcap listener is open before SYN-ACK arrives.
-       Client sends SYN then immediately opens pcap; without this the server
-       fires SYN-ACK before the client's pcap handle is ready. */
-    usleep(150000); /* 150 ms */
-
     // send the packet with the header
-    // server sends FROM its own port (destination=80) TO the client (source=12345)
-    send_ack_packet(data->destination, data->source, received_syn, server_header);
+    send_ack_packet(data->source, data->destination, received_syn, server_header);
     // pt4 Server listens for ACK and print if success
     listen_ack_package(my_port);
 

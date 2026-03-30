@@ -9,7 +9,7 @@ typedef struct PseudoIpHeader{
     uint32_t ipv4_dest;
     uint8_t  zero_byte;
     uint8_t  protocol_num; 
-    uint16_t tcp_segment_lenght; /* BUG FIX: was uint8_t, RFC 793 pseudo-header needs 16 bits */
+    uint8_t  tcp_segment_lenght;
 } PseudoIpHeader;
 
 PseudoIpHeader *psdIpHeader_intit(uint32_t ipv4_scr,

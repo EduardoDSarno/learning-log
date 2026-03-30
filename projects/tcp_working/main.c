@@ -13,10 +13,7 @@ int main(void){
 
     srand(time(NULL)); // for rand sequence number
 
-    /* 127.0.0.1 does NOT work with SOCK_RAW on macOS — raw sockets don't receive lo0 packets.
-       get_local_ip() finds the first non-loopback interface (en0, etc.) which does work. */
-    uint32_t local_ip = get_local_ip();
-    ConnectionData *data = connection_init(12345, local_ip, 80, local_ip);
+    ConnectionData *data = connection_init(12345, inet_addr("127.0.0.1"),80, inet_addr("127.0.0.1"));
 
     
     pthread_t server;
