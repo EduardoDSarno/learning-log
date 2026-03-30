@@ -10,16 +10,25 @@ struct tcphdr * listen_packet(uint8_t expected_flags){
     uint8_t *buffer = malloc(MAX_BUFFER_SIZE); // max packet size
     struct sockaddr_in src = {0};
     socklen_t src_len = sizeof(src);
-
-    /* we use pointer because recvfrom writes back to the struct*/
-    recvfrom(sockfd, buffer, MAX_BUFFER_SIZE, 0, (struct sockaddr *)&src, &src_len);
-
+    
     /*Casting the buffer into the received header*/
     struct tcphdr *received_header = (struct tcphdr *)buffer;
+    recvfrom(sockfd, buffer, MAX_BUFFER_SIZE, 0, (struct sockaddr *)&src, &src_len);
 
-    if (!(received_header->th_flags & expected_flags)){
-        perror("unexpected flag");
-        return NULL;
+    // On mac the OS gives you the full TCP pakcat containing IP header as well
+    // so we cast the buffer into the ipheader and we put the received header
+    // to go to the buffer jumping the ip header bytes (4 = 32 bit words)
+    struct ip *ip_header = (struct ip *)buffer;
+    received_header = (struct tcphdr *)(buffer + (ip_header->ip_hl * 4));
+
+    /* we use pointer because recvfrom writes back to the struct*/
+    while (!(received_header->th_flags & expected_flags)) 
+    {
+      recvfrom(sockfd, buffer, MAX_BUFFER_SIZE, 0, (struct sockaddr *)&src, &src_len);
+
+      struct ip *ip_header = (struct ip *)buffer;
+      received_header = (struct tcphdr *)(buffer + (ip_header->ip_hl * 4));
     }
+
     return received_header;
 }

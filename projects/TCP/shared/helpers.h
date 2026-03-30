@@ -11,6 +11,7 @@
 #include <arpa/inet.h>
 #include <netinet/tcp.h>
 #include "pseIPHeader.h"
+#include <netinet/ip.h>
 
 #define MAX_BUFFER_SIZE 65536
 

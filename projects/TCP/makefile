@@ -15,7 +15,7 @@ TARGET  = tcp
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS) -lpthread
 
 main.o: main.c client/client.h server/server.h shared/helpers.h shared/pseIPHeader.h
 client/client.o: client/client.c client/client.h shared/helpers.h shared/pseIPHeader.h
