@@ -1,9 +1,9 @@
-use leet150::sliding_windown::best_time_to_buy_and_sell_stock_121_easy::Solution;
+use leet150::sliding_windown::longest_substrgin_without_repeating_characters_3_med::Solution;
 
 fn main() {
 
-    let nums = vec![7,1,5,3,6,4];
-    let result = Solution::max_profit(nums);
+    let something:String = "abcabcbb".to_string();
+    let result = Solution::length_of_longest_substring(something);
     println!("{}", result);
 
 
