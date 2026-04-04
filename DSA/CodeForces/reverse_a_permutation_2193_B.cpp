@@ -8,6 +8,7 @@
 #include <vector>
 #include <algorithm>
 
+
 using namespace std;
 void reverse_a_permutation(vector<int> &nums, int lenght);
 
