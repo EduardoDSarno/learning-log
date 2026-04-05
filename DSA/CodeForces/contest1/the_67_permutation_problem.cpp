@@ -2,18 +2,10 @@
 
 /* Set up*/
 #include <cstdio>
-#include <fstream>
 #include <iostream>
 #include <ostream>
 #include <vector>
-#include <algorithm>
-#include <string>
-#include <map>
-#include <set>
-#include <queue>
-#include <stack>
-#include <cmath>
-#include <climits>
+
 
 using namespace std;
 
@@ -47,24 +39,27 @@ void maximize_medians_permutation(int n){
 
     // I have to construct a permunation 3n
     int lenght = 3 * n;
+    vector<int> result;
 
-    int count = 0;
-
-    vector<int> result(lenght);
-
-    for(int i = 0; i < lenght;++i){
-
-        int bucket = (lenght - count) % 3;
-        // so we get the bucket with /
-        result[i + bucket] = count + 1;
-
-          count++;
+    int x = n + 1;
+    int y = 1;
+    
+    for(int i = 0; i < n;++i)
+    {
+        
+        result.push_back(y);
+        result.push_back(x);
+        result.push_back(x + 1);
+        
+        y++;
+        x += 2;
 
     }
 
     for (int i = 0; i < lenght; i++) 
     {
-        cout << result[i] << " ";
+       cout << result[i] << " ";
+        
     }
     cout << "\n";
 }
