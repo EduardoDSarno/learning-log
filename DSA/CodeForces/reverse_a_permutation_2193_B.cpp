@@ -61,9 +61,10 @@ void reverse_a_permutation(vector<int> &nums, int lenght){
          if(nums[i] != n) // this means it is NOT the max of the array
                          // we want to leave the N's in order and they reduce by one when we walk
          {
-             // swap
-             reverse(nums.begin() + i, nums.end());
-             break;
+            auto iter = max_element(nums.begin() + i, nums.end()); // returs a pointer to max
+            //  index = iter - nums.begin();  since both return pointers, we subtract and get the offset which is the index
+            reverse(nums.begin() + i, iter + 1); // + 1 to be inclusive
+            break;
          }
          n--;
     }
