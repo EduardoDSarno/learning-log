@@ -2,19 +2,10 @@
 
 /* Set up*/
 #include <cstdio>
-#include <fstream>
 #include <iostream>
 #include <ostream>
 #include <stddef.h>
 #include <vector>
-#include <algorithm>
-#include <string>
-#include <map>
-#include <set>
-#include <queue>
-#include <stack>
-#include <cmath>
-#include <climits>
 
 using namespace std;
 
@@ -52,10 +43,10 @@ int passed_to_next_round(vector<int> constestants, int k){
 
     size_t size = constestants.size();
     // printf("size: %lu\n",size);
-    int break_even_Score = constestants[k];
+    int break_even_Score = constestants[k - 1];
     int i = 0;
 
-    while (constestants[i] >= break_even_Score && constestants[i] > 0) {
+    while (i < size && constestants[i] >= break_even_Score && constestants[i] > 0) {
     
         i++;
     }
