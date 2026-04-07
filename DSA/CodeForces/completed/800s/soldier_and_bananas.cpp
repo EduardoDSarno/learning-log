@@ -2,19 +2,8 @@
 
 /* Set up*/
 #include <cstdio>
-#include <fstream>
 #include <iostream>
 #include <ostream>
-#include <vector>
-#include <algorithm>
-#include <string>
-#include <map>
-#include <set>
-#include <queue>
-#include <stack>
-#include <cmath>
-#include <climits>
-
 using namespace std;
 
 void banana_borrowing(int k, int n , int w);
