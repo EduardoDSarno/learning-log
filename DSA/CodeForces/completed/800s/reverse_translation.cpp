@@ -3,19 +3,8 @@
 /* Set up*/
 #include <cstdio>
 #include <cstring>
-#include <fstream>
 #include <iostream>
-#include <numeric>
-#include <ostream>
-#include <vector>
-#include <algorithm>
 #include <string>
-#include <map>
-#include <set>
-#include <queue>
-#include <stack>
-#include <cmath>
-#include <climits>
 
 using namespace std;
 
@@ -49,11 +38,16 @@ void trasnlate(string s1,string s2){
     size_t size1 = s1.size();
     size_t size2 = s2.size();
 
+    if(size1 != size2) {
+        cout << "NO";
+        cout << '\n';
+        return;
+    }
     for (int i = 0; i < size1; i++){
 
         if(s1[i] != s2[size1 - i - 1]){
-            printf("c1, %c, c2: %c\n", s1[i], s2[size1 - i - 1]);
             cout << "NO"; 
+            cout << '\n';
             return;
         }
     }
