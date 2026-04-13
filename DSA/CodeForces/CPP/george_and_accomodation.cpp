@@ -26,27 +26,18 @@ int main() {
     #endif
     
     // code
+    int nrroms;
+    cin >> nrroms;
+    int count = 0;
 
-    string hello;
-    cin >> hello;
-
-
-    string hello2 = "hello";
-    string check_hello;
-    int i = 0;
-
-    for (char c : hello) {
+    for (int i = 0; i < nrroms; ++i) {
         
-        if(c == hello2[i]){
-            check_hello.push_back(c);
-            i++;
-        }
+        int p,q;
+
+        cin >> p;
+        cin >> q;
+
+        if(q - p >= 2) count++;
     }
-    if(check_hello == "hello"){
-        cout << "YES" ;
-    }
-    else {
-        cout << "NO";
-    }
-    cout << '\n' ;
+    cout << count << '\n';
 }
