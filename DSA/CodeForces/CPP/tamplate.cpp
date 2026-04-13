@@ -26,16 +26,4 @@
 //     #endif
     
 //     // code
-//     int tests;
-
-//     cin >> tests;
-
-//     // read first line
-//     for(int i = 0; i < tests ;++i){
-
-       
-//     }
-
-    
 // }
-
