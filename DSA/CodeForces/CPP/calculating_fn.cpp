@@ -16,7 +16,7 @@
 #include <climits>
 
 using namespace std;
-
+using ll = long long;
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -26,18 +26,15 @@ int main() {
     #endif
     
     // code
-    int nrroms;
-    cin >> nrroms;
-    int count = 0;
+    ll n,sum;
 
-    for (int i = 0; i < nrroms; ++i) {
-        
-        int p,q;
+    cin >> n;
 
-        cin >> p;
-        cin >> q;
-
-        if(q - p >= 2) count++;
+    if(n % 2 == 0){
+        sum = n / 2;
     }
-    cout << count << '\n';
+    else {
+        sum = (ceil(n + 1) / 2) * -1;
+    }
+    cout << sum << '\n';
 }
