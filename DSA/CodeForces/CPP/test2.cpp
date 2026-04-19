@@ -42,7 +42,7 @@ int main() {
         
         int t;
         cin >> t;
-        if (t > max) {
+        if (t >= max) {
         
             max = t;
             max_idx = i;
