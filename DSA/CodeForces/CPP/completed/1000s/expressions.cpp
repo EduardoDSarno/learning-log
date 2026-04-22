@@ -20,9 +20,9 @@ int main() {
     
     // code
     int a,b,c;
+    cin >> a >> b >> c;
 
    // 1 3 2
-   cin >> a >> b >> c;
 
    int add = a + b + c;
    int mult = a * b * c;
@@ -31,6 +31,6 @@ int main() {
    int p = max((a + b) * c, a * (b + c));
 
    int re = max(p,r);
-   cout << re;
+   cout << re << '\n';
 }
     
