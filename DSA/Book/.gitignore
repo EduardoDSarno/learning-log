@@ -1,0 +1,19 @@
+# C/C++ build outputs
+*.o
+*.out
+*.exe
+*.dSYM/
+
+# Default compiler output
+a.out
+
+# Local binaries from examples
+/s_stack
+/telephone_keypad
+
+# macOS/Linux executables often have no extension.
+# Ignore extensionless files at the project root, while keeping folders
+# and normal files like .cpp/.c/.md trackable.
+/*
+!/*/
+!*.*
