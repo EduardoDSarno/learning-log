@@ -1,4 +1,4 @@
-/*Work out the details of supporting constant-time deletion from a singly
+/* Work out the details of supporting constant-time deletion from a singly
 linked list as per the footnote from page 79, ideally to an actual implementation.
 Support the other operations as eﬃciently as possible.*/
 
