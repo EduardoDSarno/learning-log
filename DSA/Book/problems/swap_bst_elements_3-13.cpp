@@ -3,7 +3,6 @@ an O(n) algorithm to identify these two elements so they can be swapped back*/
 #include <cstddef>
 #include <cstdio>
 #include <stdio.h>
-#include <utility>
 #include <vector>
 using namespace std;
 
@@ -15,7 +14,8 @@ typedef struct Node
 }Node;
 
 
-// do in order traversal to get elements sorted and find out which 2 are out of order
+// this function will get a head for a bst and a vector and return a vectored with the bst sorted
+// doing in order treversal
 void in_order(Node * head, vector<int> &in_order_arr)
 {
     // if bottom left is bigger the head
