@@ -1,0 +1,13 @@
+[package]
+name = "solana_style_contract"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+solana-program = "1.18"
+borsh = "0.10"
+
+[features]
+exclude_entrypoint = []
+custom-heap = []
+custom-panic = []
