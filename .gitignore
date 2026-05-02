@@ -1,4 +1,22 @@
-target/
-**/target/
+# macOS
 .DS_Store
 **/.DS_Store
+
+# Rust
+target/
+**/target/
+
+# C
+*.o
+*.out
+*.exe
+*.dSYM/
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+
+# Environment
+.env
+.env.local
