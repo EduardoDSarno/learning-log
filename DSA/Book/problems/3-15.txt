@@ -1,0 +1,17 @@
+Describe an O(n)-time algorithm that takes an n-node binary search tree
+and constructs an equivalent height-balanced binary search tree. In a height-
+balanced binary search tree, the diﬀerence between the height of the left and
+right subtrees of every node is never more than 1.
+
+Answer:
+A O(n) time algorithm would be to perform a in order trarsversal 
+of the first bst and for each node, insated of pushing to an array as we did before
+since is know that it will be sorted you grab the middle of array as the head
+and add the left items to it's left and the right items to its right, and you do this recursevielly
+until there is nothing more to add on both sides
+
+- the base case for the recursion is empty range (left index > right index) — return NULL.
+- The time complexity is going to be O(n) because is node is created only once
+
+-Why balanced: At every node, the left and right halves of the array differ in size by at most 1,
+ so the resulting subtrees differ in height by at most 1.

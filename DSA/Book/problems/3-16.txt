@@ -1,0 +1,23 @@
+3-16. [3] Find the storage eﬃciency ratio (the ratio of data space over total space)
+for each of the following binary tree implementations on n nodes:
+(a) All nodes store data, two child pointers, and a parent pointer. The data
+    field requires 4 bytes and each pointer requires 4 bytes.
+
+(b) Only leaf nodes store data; internal nodes store two child pointers. The
+data field requires four bytes and each pointer requires two bytes.
+
+
+A answer: is 1 /4 since you have 4 fields ( 3 pointers and 1 data) and each of them stores 4 bytes
+So 1/4 n
+
+
+B answer: For a binary treee where each internal node has 2 childs if there are l leave that are l -1 internal nodes
+so:
+l = (n + 1)/ 2
+internasl = (n - 1)/2
+
+only leaves store data so it becomes 2 ( n + 1) and internal is 2(n - 1)
+
+add them and it s 4n bytes total
+
+so data 2(n + 1) / total 4n is aprox 50%
