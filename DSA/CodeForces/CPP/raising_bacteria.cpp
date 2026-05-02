@@ -30,5 +30,19 @@ int main() {
     int x;
     cin >> x;
 
+    if(x > 2){
+        if(x % 2 == 0){
+            cout << 1;
+        }
+        else {
+            cout << 2;
+        }
+
+    }
+    else 
+    {
+        cout << 1;
+    }
+    cout << '\n';
     
 }
