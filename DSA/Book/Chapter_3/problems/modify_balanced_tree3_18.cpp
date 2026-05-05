@@ -1,7 +1,7 @@
 // [5] Describe how to modify any balanced tree data structure such that search,
 // insert, delete, minimum, and maximum still take O(logn) time each, but suc-
-// cessor and predecessor now take O(1) time each. Which operations have to be
 // modified to support this?
+// cessor and predecessor now take O(1) time each. Which operations have to be
 
 #include <cstddef>
 #include <cstdio>
@@ -11,34 +11,60 @@ typedef struct Node{
     Node * left_leaf;
     Node * right_leaf;
     int value;
+    Node * predecessor;
+    Node * successor;
+    
 
 } Node;
+
+struct BST 
+{
+    Node* root;
+    Node* min_node;   
+    Node* max_node;   
+};
 
 int main(void){
 
 }
 
 /*Function to insert new node in BST using recursion*/
-Node * insert(Node * node, int value)
+Node * insert(Node * node, int value, Node * predecessor, Node * successor)
 {
     
     if(node == nullptr)
     {
-        node = new Node{NULL, NULL, value};
-        return node;
+        Node *new_node = new Node{NULL, NULL, value, NULL,NULL};
+        if (predecessor) predecessor->successor = new_node;
+        if (successor)   successor->predecessor = new_node;
+        return new_node;
     }
     else 
     {
         if(value < node->value)
-        {
-            node->left_leaf = insert(node->left_leaf, value);
+        {   
+            node->left_leaf = insert(node->left_leaf, value, predecessor, successor);
         }    
         else 
         {
-            node->right_leaf = insert(node->right_leaf, value);
+            node->right_leaf = insert(node->right_leaf, value, node, successor);
         }
         return node;
     }
+}
+
+/* 
+    THis function will do the job of unlinking the deleted node pred and succ
+    by folloing the pattern to remove a value V of the chain:
+    P = V's predecessor
+    S = V's successor
+    P->successor = S
+    S->predecessor = P
+    */
+void unlink_from_chain(Node* node) 
+{
+    if (node->predecessor) node->predecessor->successor = node->successor;
+    if (node->successor)   node->successor->predecessor = node->predecessor;
 }
 
 /*This function will remove a node from a tree*/
@@ -66,18 +92,21 @@ Node * remove(Node * node, int value)
         // 0 children
         if(node->left_leaf == NULL && node->right_leaf == NULL)
         {
+            unlink_from_chain(node);
             delete node;
             return NULL;
         }
         // case where there's 1 children
         else if(node->left_leaf == NULL)
         {
+            unlink_from_chain(node);
             Node * temp = node->right_leaf;
             delete node;
             return temp;
         }
         else if(node->right_leaf == NULL)
         {
+            unlink_from_chain(node);
             Node * temp = node->left_leaf;
             delete node;
             return temp;
