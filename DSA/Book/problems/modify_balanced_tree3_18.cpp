@@ -17,12 +17,6 @@ typedef struct Node{
 
 } Node;
 
-struct BST 
-{
-    Node* root;
-    Node* min_node;   
-    Node* max_node;   
-};
 
 int main(void){
 
@@ -136,3 +130,4 @@ Node * remove(Node * node, int value)
     return node;
    
 }
+
