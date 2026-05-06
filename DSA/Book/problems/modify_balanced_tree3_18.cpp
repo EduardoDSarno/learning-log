@@ -13,6 +13,7 @@ typedef struct Node{
     int value;
     Node * predecessor;
     Node * successor;
+    size_t subtree_size; // for question 3-20
     
 
 } Node;
@@ -22,13 +23,19 @@ int main(void){
 
 }
 
+/* Helper function for question 3-20 for counting tree size*/
+int size(Node * node)
+{
+    if(node == NULL) return 0;
+    return node->subtree_size;
+}
 /*Function to insert new node in BST using recursion*/
 Node * insert(Node * node, int value, Node * predecessor, Node * successor)
 {
     
     if(node == nullptr)
     {
-        Node *new_node = new Node{NULL, NULL, value, NULL,NULL};
+        Node *new_node = new Node{NULL, NULL, value, NULL,NULL, 1};
         if (predecessor) predecessor->successor = new_node;
         if (successor)   successor->predecessor = new_node;
         return new_node;
@@ -43,6 +50,9 @@ Node * insert(Node * node, int value, Node * predecessor, Node * successor)
         {
             node->right_leaf = insert(node->right_leaf, value, node, successor);
         }
+
+        // count subtres size indenpendlty
+        node->subtree_size = 1 + size(node->left_leaf) + size(node->right_leaf);
         return node;
     }
 }
@@ -123,6 +133,12 @@ Node * remove(Node * node, int value)
             node->value = in_order_s->value;
             node->right_leaf = remove(node->right_leaf, in_order_s->value);
 
+        }
+
+        /*Recompute sizw from stracth, taking same time as deletion LogN*/
+        if (node != NULL) 
+        {
+            node->subtree_size = 1 + size(node->left_leaf) + size(node->right_leaf);
         }
 
     }
