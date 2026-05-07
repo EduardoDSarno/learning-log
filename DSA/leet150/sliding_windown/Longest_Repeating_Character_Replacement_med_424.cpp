@@ -16,51 +16,66 @@
 #include <cstddef>
 #include <cstdio>
 #include <string>
-#include <unordered_set>
-#include <vector>
+#include <algorithm>
 
 //Window - maxCount <= k
 using namespace std;
 
-class Solution {
-    public:
-        int characterReplacement(string s, int k) {
-            
-        int left  = 0;
-        size_t size = s.length();
-        int frequency[26];
-        int most_frequnt_char_index = 0;
-        int result = 0;
+class Solution 
+{
+public:
+    int characterReplacement(string s, int k) 
+    {
+        size_t word_s = s.size();
 
-        for (int right = 0; right < size; ++right) {
-            
-            int windown_size = right - left + 1; 
-            int c = 0;
+        // start pointers
+        char * left  = &s[0];
+        
 
-            c = s[right] - 'A';
-            frequency[c]++;
+        int freq[26] = {0};
 
-            if (frequency[most_frequnt_char_index] < frequency[c]) 
+        int max_sequence = 0;
+
+        for (int i  = 0; i < word_s; i++) 
+        {
+            char * right = &s[i];
+            int windown = right - left + 1;
+            /* One bug that I was facing in my code was that I was using if/else
+                for itens left/right equal or not. But actually the frequency
+                array is the one that does this job already, because if they are equal
+                soly does not matters that much, what matters more is how many are equal*/
+            freq[*right - 'A']++;  
+            int max_freq = *max_element(freq, freq + 26);  // recompute from the array
+
+            // if the whole windwo - the max frequent elemtent is smaller than k
+            // it just means the windwon is still valid
+            // because we could replace k with our value
+            // so we check for the opposite (invalidation)
+            if(windown -  max_freq > k)
             {
-                most_frequnt_char_index = c;
-            }
-
-            // check if valid
-            while(windown_size - frequency[most_frequnt_char_index] > k){
-                
-                c = s[left] - 'A';
-                frequency[c]--;
+                // when the windown is not valid anymore
+                // we need to shrking the windown from left
+                freq[*left - 'A']--;  // remove left char from frequency count
                 left++;
+                windown = right - left + 1;
             }
-                
-            int temp = frequency[most_frequnt_char_index] + k;
-            if(temp > result) result = temp;
+              
+            
+            printf("windown_size = %d, from %c, index %ld to %c index %ld\n",
+                windown,
+                *left, left - &s[0],   // char, then its index
+                *right, right - &s[0]  // char, then its index
+            );
+
+            if(windown > max_sequence) max_sequence = windown;
         }
-        return result;
+        printf("%d\n", max_sequence);
+        return max_sequence;
     }
 };
 
-int main(void){
+int main(void)
+{
 
     char test[] = "AABABBA";
     int k = 1;
