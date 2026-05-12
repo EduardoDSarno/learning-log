@@ -42,16 +42,8 @@ int main() {
     freq[1] -= min(freq[1], freq[3]); // clean up of ones 
 
     // 2
-
     count += freq[2] / 2;
-    if (freq[2] % 2 == 1) 
-    {
-        count += 1;
-        freq[1] -= min(freq[1], 2);
-    }
 
     // 1
-    count += ceil((freq[1] + 3)/ 4); // remainins
-    
-    cout << count << '\n';
+    count += ceil(freq[1]/ 4); // remainins
 }
