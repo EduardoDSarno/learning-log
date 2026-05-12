@@ -2,18 +2,8 @@
 
 /* Set up*/
 #include <cstdio>
-#include <fstream>
 #include <iostream>
 #include <ostream>
-#include <vector>
-#include <algorithm>
-#include <string>
-#include <map>
-#include <set>
-#include <queue>
-#include <stack>
-#include <cmath>
-#include <climits>
 
 using namespace std;
 using ll = long long;
@@ -29,20 +19,13 @@ int main() {
     // code
     int x;
     cin >> x;
-
-    if(x > 2){
-        if(x % 2 == 0){
-            cout << 1;
-        }
-        else {
-            cout << 2;
-        }
-
-    }
-    else 
+    int count = 0;
+    
+    while (x != 0) 
     {
-        cout << 1;
+        count += x % 2;
+        x /= 2;
     }
-    cout << '\n';
+    cout << count << '\n';
     
 }
