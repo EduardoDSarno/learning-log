@@ -35,15 +35,10 @@ int main() {
     }
 
     int max = 0;
-    string w;
     for (const auto& [key, value] : team) 
     {
-        if (value > max) 
-        {
-            max = value;
-            w = key;
-        }
+        if (value > max) max = value;
     }
-    cout << w << '\n';
+    cout << max << '\n';
 
 }
