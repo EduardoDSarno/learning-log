@@ -31,17 +31,19 @@ int main() {
         cin >> a;
         x.push_back(a);
     }
-    sort(x.begin(), x.end());
+
     cin >> q;
 
-    
+    sort(x.begin(), x.end());
     for (int i = 0; i < q; ++i) 
     {
         int count = 0;
         int y;
         cin >> y;
-        auto j = upper_bound(x.begin(), x.end(), y);
-        count = j - x.begin();
+        while (y > x[count]) 
+        {
+            count++;
+        }
         cout << count <<'\n';
     }
 }
