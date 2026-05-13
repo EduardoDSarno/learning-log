@@ -3,7 +3,7 @@
 /* Set up*/
 #include <cstdio>
 #include <iostream>
-#include <ostream>
+//#include <ostream>
 #include <unordered_map>
 
 #include <string>
@@ -35,10 +35,11 @@ int main() {
     }
 
     int max = 0;
-    for (const auto& [key, value] : team) 
-    {
-        if (value > max) max = value;
-    }
-    cout << max << '\n';
+    // just tp remove warning
+    // for (const auto& [key, value] : team) 
+    // {
+    //     if (value > max) max = value;
+    // }
+    // cout << max << '\n';
 
 }
