@@ -1,2 +1,0 @@
-pub mod best_time_to_buy_and_sell_stock_121_easy;
-pub mod longest_substrgin_without_repeating_characters_3_med;
