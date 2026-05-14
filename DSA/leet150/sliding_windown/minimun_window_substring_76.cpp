@@ -15,6 +15,7 @@ public:
     {
         int left = 0,right = 0, min_windon = INT_MAX;
         string result = "";
+        unordered_set<int> t_letters_idx;
 
         // cover both upper and lowercase
         int freqt[52]  = {0};
@@ -23,6 +24,7 @@ public:
         for (char c : t) 
         {
             increment_freq_array(c, freqt);
+            t_letters_idx.insert(charIndex(c));
         }
 
         while(right < s.size())
@@ -36,7 +38,7 @@ public:
             
                 // this loops hardcore checks if it is valid meaning all frequecnies in freqt
                 // are covered in freq2. Because if their count is bigger they are covered
-                for (int i = 0; i < 52; ++i)
+                for (int i: t_letters_idx)
                 {
                     if (freq2[i] < freqt[i]) 
                     { 
@@ -90,8 +92,8 @@ public:
 
 int main(void)
 {
-    string s = "a";
-    string t = "aa";
+    string s = "ADOBECODEBANC";
+    string t = "ABC";
 
     Solution solution;
 
